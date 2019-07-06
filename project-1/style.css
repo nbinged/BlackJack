@@ -1,3 +1,114 @@
-* {
-    text-align: center;
+/*html {
+    position: relative;
+    min-height: 100%;
+}*/
+
+header {
+background-color: #000000;
+color: #FFFFFF;
+padding: 20px;
+text-align: center;
+}
+
+nav {
+background-color: #3F5450;
+color: #FFFFFF;
+padding: 10px;
+text-align: center;
+border-bottom: 3px black solid;
+}
+
+a {
+margin: 0 20px;
+font-family: "Raleway";
+letter-spacing: 1px;
+font-weight: 600;
+font-size: 15px;
+text-transform: uppercase;
+color: #FFFFFF;
+border-bottom: 2px solid transparent;
+}
+
+a:hover {
+color: #EB8686;
+}
+
+h1 {
+font-family: century-gothic;
+font-weight: bold;
+}
+
+body {
+background-color: #EB8686;
+min-height: 100%;
+}
+
+footer {
+background-color: #000000;
+color: #FFFFFF;
+text-align: right;
+position: absolute;
+left: 0;
+bottom: 0;
+width: 100%;
+overflow: hidden;
+}
+
+.container-fluid {
+background: url("background.png") no-repeat center center fixed;
+background-size: cover;
+padding: 50px;
+}
+
+.col-6 {
+min-height: 600px;
+min-width: 1200px;
+background-color: #3f5450;
+border: solid black;
+margin: 0 auto;
+}
+
+.button-row {
+justify-content: center;
+align-content: center;
+align-items: center;
+display: flex;
+}
+
+.button {
+display: inline-block;
+padding: 10px 20px;
+font-size: 20px;
+cursor: pointer;
+text-align: center;
+text-decoration: none;
+outline: none;
+color: #fff;
+background-color: #4CAF50;
+border: none;
+border-radius: 15px;
+box-shadow: 0 9px #999;
+margin: 20px 5px;
+font-family: "arial";
+font-weight: bold;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+background-color: #3e8e41;
+box-shadow: 0 5px #666;
+transform: translateY(4px);
+}
+
+#btn-hit{
+background-color: red;
+}
+
+#btn-stay{
+background-color: blue;
+}
+
+#btn-restart{
+background-color: green;
 }

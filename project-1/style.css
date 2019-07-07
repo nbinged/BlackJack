@@ -1,19 +1,14 @@
-/*html {
-    position: relative;
-    min-height: 100%;
-}*/
-
 header {
 background-color: #000000;
 color: #FFFFFF;
-padding: 20px;
+padding: 8px;
 text-align: center;
 }
 
 nav {
 background-color: #3F5450;
 color: #FFFFFF;
-padding: 10px;
+padding: 3px;
 text-align: center;
 border-bottom: 3px black solid;
 }
@@ -40,7 +35,7 @@ font-weight: bold;
 
 body {
 background-color: #EB8686;
-min-height: 100%;
+
 }
 
 footer {
@@ -48,22 +43,20 @@ background-color: #000000;
 color: #FFFFFF;
 text-align: right;
 position: absolute;
-left: 0;
-bottom: 0;
 width: 100%;
 overflow: hidden;
 }
 
 .container-fluid {
-background: url("background.png") no-repeat center center fixed;
+background: url("images/background.png") no-repeat center center fixed;
 background-size: cover;
-padding: 50px;
+padding: 115px;
 }
 
 .col-6 {
-min-height: 600px;
+min-height: 500px;
 min-width: 1200px;
-background-color: #3f5450;
+background-color: #3F5450;
 border: solid black;
 margin: 0 auto;
 }
@@ -72,7 +65,7 @@ margin: 0 auto;
 justify-content: center;
 align-content: center;
 align-items: center;
-display: flex;
+display:flex;
 }
 
 .button {
@@ -93,6 +86,19 @@ font-family: "arial";
 font-weight: bold;
 }
 
+.card
+{
+    padding: 10px;
+    border: solid 1px #808080;
+    background-color: white;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 14pt;
+    text-align: center;
+    color:black;
+    margin: 3px;
+}
+
 .button:hover {background-color: #3e8e41}
 
 .button:active {
@@ -111,4 +117,9 @@ background-color: blue;
 
 #btn-restart{
 background-color: green;
+}
+
+#player-score{
+font-weight: bold;
+color: #FFFFFF;
 }

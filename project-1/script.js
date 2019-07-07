@@ -17,6 +17,21 @@ var sumOfPlayersCards = 0;
 //     console.log("Game board loaded")
 
 // };
+var shuffle = function() {
+
+    for (i = 0; i < 200; i++) {
+
+        var cut1 = Math.floor((Math.random() * cards.length));
+        var cut2 = Math.floor((Math.random() * cards.length));
+        var temp = cards[cut1];
+
+        cards[cut1] = cards[cut2];
+        cards[cut2] = temp;
+    }
+    console.log(cards);
+}
+shuffle();
+
 
 var renderDeck = function() {
 
@@ -25,25 +40,25 @@ var renderDeck = function() {
     for (var i = 0; i < cards.length; i++)
     {
         var card = document.createElement("div");
-        var value = document.createElement("div");
-        var suit = document.createElement("div");
         var cardImg  = document.createElement("img");
         card.className = "card";
-        value.className = "value";
-        suit.className = "suit";
-        cardImg.className = cards[i].Cardimage;
+        cardImg.src = cards[i].Cardimage;
+        // var value = document.createElement("div");
+        // var suit = document.createElement("div");
+        // value.className = "value";
+        // suit.className = "suit";
 
-        value.innerHTML= cards[i].Value;
-        suit.innerHTML = cards[i].Suit;
-        card.appendChild(value);
-        card.appendChild(suit);
+        // value.innerHTML= cards[i].Value;
+        // suit.innerHTML = cards[i].Suit;
+        // card.appendChild(value);
+        // card.appendChild(suit);
         card.appendChild(cardImg);
 
         document.getElementById('deck').appendChild(card);
-
     }
-}
+};
 renderDeck();
+
 
 /////////////////////
 //Starting the game//

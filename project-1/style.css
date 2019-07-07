@@ -47,6 +47,11 @@ width: 100%;
 overflow: hidden;
 }
 
+img {
+max-width:144px;
+max-height:201px;
+}
+
 .container-fluid {
 background: url("images/background.png") no-repeat center center fixed;
 background-size: cover;
@@ -88,15 +93,14 @@ font-weight: bold;
 
 .card
 {
-    padding: 10px;
-    border: solid 1px #808080;
-    background-color: white;
-    display: inline-block;
-    border-radius: 10px;
-    font-size: 14pt;
-    text-align: center;
-    color:black;
-    margin: 3px;
+padding: 1px;
+border: solid 1px #808080;
+background-color: white;
+display: inline-block;
+border-radius: 10px;
+text-align: center;
+color:black;
+margin: 3px;
 }
 
 .button:hover {background-color: #3e8e41}

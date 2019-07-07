@@ -21,7 +21,7 @@ Cardimage: "images/hearts/hearts-3.png"
 {
 Value: "4",
 Suit: "&hearts;",
-Cardimage: "images/hearts/hearts;-4.png"
+Cardimage: "images/hearts/hearts-4.png"
 },
 
 {
@@ -288,29 +288,29 @@ Cardimage: "images/clubs/clubs-8.png"
 {
 Value: "9",
 Suit: "&clubs;",
-Cardimage: "image/clubs.clubs-9.png"
+Cardimage: "images/clubs/clubs-9.png"
 },
 
 {
 Value: "10",
 Suit: "&clubs;",
-Cardimage: "image/clubs.clubs-10.png"
+Cardimage: "images/clubs/clubs-10.png"
 },
 
 {
 Value: "J",
 Suit: "&clubs;",
-Cardimage: "image/clubs.clubs-jack.png"
+Cardimage: "images/clubs/clubs-jack.png"
 },
 
 {
 Value: "Q",
 Suit: "&clubs;",
-Cardimage: "image/clubs.clubs-queen.png"
+Cardimage: "images/clubs/clubs-queen.png"
 },
 
 {
 Value: "K",
 Suit: "&clubs;",
-Cardimage: "image/clubs.clubs-king.png"
+Cardimage: "images/clubs/clubs-king.png"
 }];

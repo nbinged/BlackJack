@@ -68,7 +68,7 @@ var scoreCheck = function() {
     if (aceCount > 0 && (sum > 21)) {
             sum -=10;
             aceCount -= 1;
-        console.log("Ace taken as 1"+sum);
+        console.log("Ace taken as '1'. New score is "+sum);
         console.log(aceCount)
     }
 
@@ -122,12 +122,14 @@ var hitMe = function(event) {
         document.getElementById('deck').appendChild(card);
 
         scoreCheck();
-        checkFor21();
-};
 
-// Stay, End the game and check how many points the player has.
-var stay = function(event) {
-    checkFor21();
+            // Stay, End the game and check how many points the player has.
+            var stay = function(event) {
+
+                if (sum < 21) {
+                console.log("You lose :(");
+                }
+            }
 };
 
 ///////////////////////////////

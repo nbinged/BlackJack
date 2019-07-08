@@ -27,20 +27,23 @@
         <a href="#">Instructions</a>
     </nav>
 
-    <div class="container-fluid">
-        <div class="col-6" id="deck">
+<div class="container-fluid">
 
-            <p id="player-score">Player Score:</p>
+    <div class="col-6" id="deck">
 
-        </div>
+            <h1 id="press-start">&darr; <span style="">PRESS START!</span> &darr;</h1>
+            <div id="points" style="display:none">Points: </div>
+            <div id="status-win" style="display:none"></div>
+            <div id="status-lose" style="display:none">Game Status: </div>
+    </div>
 
         <div class="button-row">
             <input type="button" id="btn-start" class="button" style="display:block;"value="START" onclick="startGame()"/>
             <input type="button" id="btn-hit" class="button" style="display:none;" value="HIT ME!" onclick="hitMe()" />
-            <input type="button" id="btn-stay" class="button" style="display:none;" value="STAY" onclick="stay()"/>
             <input type="button" id="btn-restart" class="button" style="display:none;" value="RESTART" onclick="restart()"/>
+            <!-- <input type="button" id="btn-stay" class="button" style="display:none;" value="STAY" onclick="stay()"/> -->
         </div>
-    </div>
+</div>
 
     <script type="text/javascript" src="cards.js"></script>
     <script type="text/javascript" src="script.js"></script>
@@ -52,3 +55,4 @@
   </body>
 
 </html>
+

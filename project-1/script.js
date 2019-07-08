@@ -10,12 +10,15 @@ var playersHand = [];
 //Starting the game//
 /////////////////////
 var startGame = function(event) {
+
     hideStartBtn();
     showHitBtn();
-    showStayBtn();
     showRestartBtn();
     shuffle();
     dealCards();
+    hidePressStart();
+    putPlayerUI();
+    // showStayBtn();
 }
 
 ///////////////////////
@@ -74,17 +77,24 @@ var scoreCheck = function() {
 
     if (sum > 21) {
         console.log("You lose :(");
+        document.getElementById("status-lose").style.display = "block";
+        document.getElementById("status-lose").innerHTML = "YOU LOSE! :(";
+        hideHitBtn();
+
     }
 
     else if (sum === 21 || (playersHand.length === 7 && sum < 21)) {
         console.log("You Win! YAY! :)");
+        document.getElementById("status-win").style.display = "block";
+        document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
+        hideHitBtn();
     }
+
+    document.getElementById('points').innerHTML = "Points: "+sum;
 };
 
 //DealCards, give player their starting 2 cards.
 var dealCards = function() {
-
-    document.getElementById('deck').innerHTML = '';
 
     for (var i = 0; i < 2; i++) {
 
@@ -97,11 +107,32 @@ var dealCards = function() {
 
             card.appendChild(cardImg);
             document.getElementById('deck').appendChild(card);
-            console.log(playersHand);
 
             scoreCheck();
     }
 };
+
+// var createUI = function() {
+
+//     document.getElementById('players').innerHTML = '';
+
+//         var div_player = document.createElement('div');
+//         var div_playerid = document.createElement('div');
+//         var div_hand = document.createElement('div');
+//         var div_points = document.createElement('div');
+
+//         div_points.className = 'points';
+//         div_points.id = 'points_' + i;
+//         div_player.id = 'player_' + i;
+//         div_player.className = 'player';
+//         div_hand.id = 'hand_' + i;
+
+//         div_playerid.innerHTML = players[i].ID;
+//         div_player.appendChild(div_playerid);
+//         div_player.appendChild(div_hand);
+//         div_player.appendChild(div_points);
+//         document.getElementById('players').appendChild(div_player);
+// }
 
 // HitMe, Adds an extra card to the player's array.
 var hitMe = function(event) {
@@ -123,35 +154,41 @@ var hitMe = function(event) {
 
         scoreCheck();
 
-            // Stay, End the game and check how many points the player has.
-            var stay = function(event) {
+            // // Stay, End the game and check how many points the player has.
+            // var stay = function(event) {
 
-                if (sum < 21) {
-                console.log("You lose :(");
-                }
-            }
+            //     if (sum < 21) {
+            //     console.log("You lose :(");
+            //     }
+            // }
 };
 
 ///////////////////////////////
 ///GAME BOARD BUTTON TOGGLES///
 ///////////////////////////////
 
-var hideStartBtn = function(){
+var showStartBtn = function(){
     var startButton = document.querySelector('#btn-start');
+    document.getElementById("btn-start").style.display = "block";
+    console.log("show 'START' button");
+};
+
+var hideStartBtn = function(){
+    var hideStartButton = document.querySelector('#btn-start');
     document.getElementById("btn-start").style.display = "none";
     console.log("hide 'START' button");
 };
 
 var showHitBtn = function(){
-    var hitmeButton = document.querySelector('#btn-hit');
+    var hitMeButton = document.querySelector('#btn-hit');
     document.getElementById("btn-hit").style.display = "block";
     console.log("show 'HIT' button");
 };
 
-var showStayBtn = function(){
-      var startButton = document.querySelector('#btn-stay');
-      document.getElementById("btn-stay").style.display = "block";
-      console.log("show 'STAY' button");
+var hideHitBtn = function(){
+    var hideHitBtn = document.querySelector('#btn-hit');
+    document.getElementById("btn-hit").style.display = "none";
+    console.log("hide 'HIT' button");
 };
 
 var showRestartBtn = function(){
@@ -160,16 +197,50 @@ var showRestartBtn = function(){
     console.log("show 'RESTART' button");
 };
 
-/////////////////////
-/// THINGS TO ADD ///
-/////////////////////
-
-var restart = function(event) {
+var hideRestartBtn = function(){
+    var restartBtn  = document.querySelector('#btn-restart');
+    document.getElementById("btn-restart").style.display = "none";
+    console.log("hide 'RESTART' button");
 };
 
-//////////////////////////////////////////
-///Testing Functions (Not used in game)///
-//////////////////////////////////////////
+var restart = function(event) {
+location.reload();
+};
+
+var hidePressStart = function() {
+    document.getElementById("press-start").style.display = "none";
+}
+
+// var showStayBtn = function(){
+//       var startButton = document.querySelector('#btn-stay');
+//       document.getElementById("btn-stay").style.display = "block";
+//       console.log("show 'STAY' button");
+// };
+
+// var hideStayBtn = function(){
+//       var startButton = document.querySelector('#btn-stay');
+//       document.getElementById("btn-stay").style.display = "none";
+//       console.log("hide 'STAY' button");
+// };
+
+////////////////////
+//Game UI elements//
+////////////////////
+var putPlayerUI = function() {
+
+    document.getElementById("points").style.display = "block";
+    document.getElementById("status").style.display = "hidden";
+
+    // var pointsUI = document.createElement("div");
+    // var statusUI  = document.createElement("div");
+
+    // pointsUI.id = "pointsUI";
+    // statusUI.id = "statusUI";
+}
+
+/////////////////////////////////////////////////
+///Testing Functions (For card reference only)///
+/////////////////////////////////////////////////
 
 // var renderDeck = function() {
 

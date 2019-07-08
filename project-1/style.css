@@ -56,6 +56,7 @@ max-height:201px;
 background: url("images/background.png") no-repeat center center fixed;
 background-size: cover;
 padding: 115px;
+height: 100%;
 }
 
 .col-6 {

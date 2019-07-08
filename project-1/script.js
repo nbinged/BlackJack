@@ -4,19 +4,25 @@ console.log("Hello script.js");
 //Global Variables://
 /////////////////////
 var deck = new Array();
+var playersHand = [];
 
-// var randomCard = (Math.floor(Math.random() * Value.length));
-var playersCards = [];
-var sumOfPlayersCards = 0;
+/////////////////////
+//Starting the game//
+/////////////////////
+var startGame = function(event) {
+    hideStartBtn();
+    showHitBtn();
+    showStayBtn();
+    showRestartBtn();
+    shuffle();
+    dealCards();
+}
 
-/////////////////////////////
-//Upon loading the web-page//
-/////////////////////////////
+///////////////////////
+//Card Deck Functions//
+///////////////////////
 
-// window.onload = function(){
-//     console.log("Game board loaded")
-
-// };
+//Shuffles deck at the start of the game.
 var shuffle = function() {
 
     for (i = 0; i < 200; i++) {
@@ -29,117 +35,104 @@ var shuffle = function() {
         cards[cut2] = temp;
     }
     console.log(cards);
-}
-shuffle();
+};
 
+var scoreCheck = function() {
+// To sum up the value of playerCards' array.
+    var sum = 0;
+    var pictureCount = 0;
+    var aceCount = 0;
 
-var renderDeck = function() {
+    for (i = 0; i < playersHand.length; i++) {
+
+        if (playersHand[i].Value === "J" || playersHand[i].Value === "Q" || playersHand[i].Value === "K") {
+
+            sum += 10;
+            pictureCount += 1;
+            console.log("Added picture-card. Current score: "+sum)
+        }
+
+        else if (playersHand[i].Value === "A") {
+
+            sum += 11;
+            aceCount += 1;
+            console.log("Added Ace-card. Current score: "+sum)
+        }
+
+        else {
+            sum += (parseInt(playersHand[i].Value));
+            console.log("Added another card. Current score: "+sum)
+        }
+    };
+
+    if (aceCount > 0 && (sum > 21)) {
+            sum -=10;
+            aceCount -= 1;
+        console.log("Ace taken as 1"+sum);
+        console.log(aceCount)
+    }
+
+    if (sum > 21) {
+        console.log("You lose :(");
+    }
+
+    else if (sum === 21 || (playersHand.length === 7 && sum < 21)) {
+        console.log("You Win! YAY! :)");
+    }
+};
+
+//DealCards, give player their starting 2 cards.
+var dealCards = function() {
 
     document.getElementById('deck').innerHTML = '';
 
-    for (var i = 0; i < cards.length; i++)
-    {
+    for (var i = 0; i < 2; i++) {
+
         var card = document.createElement("div");
         var cardImg  = document.createElement("img");
-        card.className = "card";
-        cardImg.src = cards[i].Cardimage;
-        // var value = document.createElement("div");
-        // var suit = document.createElement("div");
-        // value.className = "value";
-        // suit.className = "suit";
 
-        // value.innerHTML= cards[i].Value;
-        // suit.innerHTML = cards[i].Suit;
-        // card.appendChild(value);
-        // card.appendChild(suit);
-        card.appendChild(cardImg);
+            playersHand.push(cards[i]);
+            card.className = "card";
+            cardImg.src = playersHand[i].Cardimage;
 
-        document.getElementById('deck').appendChild(card);
+            card.appendChild(cardImg);
+            document.getElementById('deck').appendChild(card);
+            console.log(playersHand);
+
+            scoreCheck();
     }
 };
-renderDeck();
 
-
-/////////////////////
-//Starting the game//
-/////////////////////
-var startGame = function(event) {
-    var randomCard = "";
-    hideStartBtn();
-    showHitBtn();
-    showStayBtn();
-    showRestartBtn();
-
-    for (var i = 0; i < 2; i++) {
-    randomCard = (Math.floor(Math.random() * cards.length));
-
-    console.log("Player's card is "+playersCards[0]);
-    console.log("Player's second card is "+playersCards[1]);
-    console.log(playersCards);
-    }
-}
-
-// If player clicks the HIT ME button, the player gets another card.
+// HitMe, Adds an extra card to the player's array.
 var hitMe = function(event) {
 
-    playerCards.push(Math.floor(Math.random() * cardValues.length));
+    var card = document.createElement("div");
+    var cardImg  = document.createElement("img");
+    // var x = (Math.floor(Math.random() * cards.length));
 
-    console.log("Player has these cards"+playerCards);
-    console.log(playerCards);
-}
+        for (var x = 0; x < playersHand.length; x++)
 
-// If the player would like to end the game
-var stay = function(event) {
+        var dealtCard = cards.pop();
+        playersHand.push(dealtCard);
 
-// To sum up the value of playerCards' array.
-    for (let i = 0; i < playerCards.length; i++){
-            sumOfPlayersCards = sumOfPlayersCards + playerCards[i];
-        }
+        card.className = "card";
+        cardImg.src = playersHand[x].Cardimage;
 
-    if (sumOfPlayersCards < 21 || sumOfPlayersCards > 21) {
-        console.log("You lose :(")
-        }
+        card.appendChild(cardImg);
+        document.getElementById('deck').appendChild(card);
 
-    else if (sumOfPlayersCards === 21){
-        console.log("YOU WON :)")
-    }
-
-    else {
-        console.log("Bug here, fix it")
-     }
-}
-
-/////////////////////
-/// THINGS TO ADD ///
-/////////////////////
-
-var checkWinState = function() {
-
-   if (sumOfPlayersCards === 21 || (playersCards.length = 5 && sumOfPlayersCards < 21)) {
-    alert("YOU WON")
-    }
-
-   else if (sumOfPlayersCards < 21 || sumOfPlayersCards > 21) {
-    alert("YOU LOSE :(")
-    }
+        scoreCheck();
+        checkFor21();
 };
 
-
-var restart = function(event) {
+// Stay, End the game and check how many points the player has.
+var stay = function(event) {
+    checkFor21();
 };
 
 ///////////////////////////////
 ///GAME BOARD BUTTON TOGGLES///
 ///////////////////////////////
-
-// var createBoard = function() {
-// for (var i = 0; i < 2; i++) {
-//     var cardElement = document.createElement('img');
-//     cardElement.setAttribute("src", "images/&hearts;/back.png");
-//     cardElement.setAttribute("data-id", i);
-//     document.getElementById("game-board").appendChild(cardElement);
-//     }
-// };
 
 var hideStartBtn = function(){
     var startButton = document.querySelector('#btn-start');
@@ -163,4 +156,41 @@ var showRestartBtn = function(){
     var restartBtn  = document.querySelector('#btn-restart');
     document.getElementById("btn-restart").style.display = "block";
     console.log("show 'RESTART' button");
-}
+};
+
+/////////////////////
+/// THINGS TO ADD ///
+/////////////////////
+
+var restart = function(event) {
+};
+
+//////////////////////////////////////////
+///Testing Functions (Not used in game)///
+//////////////////////////////////////////
+
+// var renderDeck = function() {
+
+//     document.getElementById('deck').innerHTML = '';
+
+//     for (var i = 0; i < cards.length; i++)
+//     {
+//         var card = document.createElement("div");
+//         var cardImg  = document.createElement("img");
+//         card.className = "card";
+//         cardImg.src = cards[i].Cardimage;
+//         // var value = document.createElement("div");
+//         // var suit = document.createElement("div");
+//         // value.className = "value";
+//         // suit.className = "suit";
+
+//         // value.innerHTML= cards[i].Value;
+//         // suit.innerHTML = cards[i].Suit;
+//         // card.appendChild(value);
+//         // card.appendChild(suit);
+//         card.appendChild(cardImg);
+
+//         document.getElementById('deck').appendChild(card);
+//     }
+// };
+// renderDeck();

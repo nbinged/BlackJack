@@ -313,4 +313,5 @@ Cardimage: "images/clubs/clubs-queen.png"
 Value: "K",
 Suit: "&clubs;",
 Cardimage: "images/clubs/clubs-king.png"
-}];
+}
+];

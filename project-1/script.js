@@ -20,7 +20,8 @@ var startGame = function(event) {
     playerCards();
     playerCards();
     dealerCards();
-    // putPlayerUI();
+    dealerCover();
+    putPlayerUI();
 }
 
 ///////////////////////
@@ -80,7 +81,11 @@ var playerScoreCheck = function() {
         console.log(aceCount)
         }
 
-    document.getElementById('points').innerHTML = "Points: "+player.score;
+    if (player.score > 21) {
+        checkWin();
+    }
+
+    document.getElementById('points').innerHTML = "Points: "+player.score;;
 };
 
 var dealerScoreCheck = function() {
@@ -115,8 +120,6 @@ var dealerScoreCheck = function() {
         console.log("Ace taken as '1'. Dealer's score is "+dealer.score);
         console.log(aceCount)
     }
-
-    document.getElementById('points').innerHTML = "Points: "+dealer.score;
 }
 
 //DealCards, give player their starting 2 cards.
@@ -143,8 +146,6 @@ var playerCards = function() {
 
 var dealerCards = function() {
 
-    for (var i = 0; i < 2; i++) {
-
         var cardDiv = document.createElement("div");
         var cardImg  = document.createElement("img");
 
@@ -161,7 +162,26 @@ var dealerCards = function() {
         document.getElementById('dealer-deck').appendChild(cardDiv);
 
         dealerScoreCheck();
-    }
+}
+
+var dealerCover = function() {
+
+        var cardDiv = document.createElement("div");
+        var cardImg  = document.createElement("img");
+
+        var dealtCard = deck.pop();
+        dealer.cards.push(dealtCard);
+
+        console.log("Dealer received card:")
+        console.log(dealtCard);
+
+        cardDiv.className = "cardDiv";
+        cardImg.src = "images/back.png";
+
+        cardDiv.appendChild(cardImg);
+        document.getElementById('dealer-deck').appendChild(cardDiv);
+
+        dealerScoreCheck();
 }
 
 // HitMe, Adds an extra card to the player's array.
@@ -170,13 +190,11 @@ var hitMe = function(event) {
     var cardDiv = document.createElement("div");
     var cardImg  = document.createElement("img");
 
-        for (var x = 1; x < player.cards.length; x++)
-
         var dealtCard = deck.pop();
         player.cards.push(dealtCard);
 
         cardDiv.className = "cardDiv";
-        cardImg.src = player.cards[x].Cardimage;
+        cardImg.src = player.cards[player.cards.length-1].Cardimage;
 
         cardDiv.appendChild(cardImg);
         document.getElementById('player-deck').appendChild(cardDiv);
@@ -187,21 +205,21 @@ var hitMe = function(event) {
 var hitDealer = function() {
 
     var cardDiv = document.createElement("div");
-    var cardImg  = document.createElement("img"); {
+    var cardImg  = document.createElement("img");
 
-        // while (dealer.score < 17) {
+       //for (var x = 0; x < player.cards.length; x++)
 
         var dealtCard = deck.pop();
         dealer.cards.push(dealtCard);
 
         cardDiv.className = "cardDiv";
-        cardImg.src = dealer.cards[x].Cardimage;
+        cardImg.src = dealer.cards[dealer.cards.length-1].Cardimage;
+        //Hidden to player until end of the game.
 
         cardDiv.appendChild(cardImg);
-        document.getElementById('dealer-deck').appendChild(cardDiv);}
+        document.getElementById('dealer-deck').appendChild(cardDiv);
 
         dealerScoreCheck();
-    // }
 }
 
 // Function stand ends player turn and move on to dealer's turn
@@ -210,39 +228,73 @@ var stand = function(event) {
         while (dealer.score < 17) {
         hitDealer();
         dealerScoreCheck();
+        checkWin()
     }
 }
 
-//Function checkWin
+var checkWin = function() {
 
-    // if (player.score > 21) {
-    //     console.log("You lose :(");
-    //     document.getElementById("status-lose").style.display = "block";
-    //     document.getElementById("status-lose").innerHTML = "HOUSE WINS! YOU LOSE! :(";
-    //     hideHitBtn();
+    if (player.score > 21) {
+        console.log("You lose :(");
+        document.getElementById("status-lose-player").style.display = "block";
+        document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-win-dealer").style.display = "block";
+        document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        hideHitBtn();
+        hideStandBtn();
+    }
 
-    // }
+    else if (player.score === 21 || (player.cards.length === 6 && player.score < 21)) {
+        console.log("You Win! YAY! :)");
+        document.getElementById("status-win-player").style.display = "block";
+        document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
+        document.getElementById("status-lose-dealer").style.display = "block";
+        document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
+        hideHitBtn();
+        hideStandBtn();
+    }
 
-    // else if (player.score === 21 || (player.cards.length === 5 && player.score < 21)) {
-    //     console.log("You Win! YAY! :)");
-    //     document.getElementById("status-win").style.display = "block";
-    //     document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
-    //     hideHitBtn();
-    // }
+    else if (dealer.score > 21) {
+        console.log("You lose :(");
+        document.getElementById("status-win-player").style.display = "block";
+        document.getElementById("status-win-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-lose-dealer").style.display = "block";
+        document.getElementById("status-lose-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        hideHitBtn();
+        hideStandBtn();
+    }
 
-    //     if (dealer.score > 21) {
-    //     console.log("You lose :(");
-    //     document.getElementById("status-lose").style.display = "block";
-    //     document.getElementById("status-lose").innerHTML = "HOUSE WINS! YOU LOSE! :(";
-    //     hideHitBtn();
-    // }
+    else if (dealer.score === 21 || (dealer.cards.length === 6 && dealer.score < 21)) {
+        console.log("You Win! YAY! :)");
+        document.getElementById("status-lose-player").style.display = "block";
+        document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-win-dealer").style.display = "block";
+        document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        hideHitBtn();
+        hideStandBtn();
+    }
 
-    // else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
-    //     console.log("You Win! YAY! :)");
-    //     document.getElementById("status-win").style.display = "block";
-    //     document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
-    //     hideHitBtn();
-    // }
+    else if (player.score > dealer.score) {
+        console.log("You Win! YAY! :)");
+        document.getElementById("status-win-player").style.display = "block";
+        document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
+        document.getElementById("status-lose-dealer").style.display = "block";
+        document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
+        hideHitBtn();
+        hideStandBtn();
+    }
+
+    else if (player.score < dealer.score) {
+        console.log("You lose :(");
+        document.getElementById("status-lose-player").style.display = "block";
+        document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-win-dealer").style.display = "block";
+        document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        hideHitBtn();
+        hideStandBtn();
+    }
+
+};
 
 ///////////////////////////////
 ///GAME BOARD BUTTON TOGGLES///
@@ -299,8 +351,8 @@ var showStandBtn = function(){
 };
 
 var hideStandBtn = function(){
-      var startButton = document.querySelector('#btn-stay');
-      document.getElementById("btn-stay").style.display = "none";
+      var startButton = document.querySelector('#btn-stand');
+      document.getElementById("btn-stand").style.display = "none";
       console.log("hide 'STAND' button");
 };
 
@@ -308,23 +360,14 @@ var hideStandBtn = function(){
 //Game UI elements//
 ////////////////////
 var putPlayerUI = function() {
-
     document.getElementById("points").style.display = "block";
-    document.getElementById("status").style.display = "hidden";
+    // document.getElementById("money").style.display = "block";
+    document.getElementById("status-win-player").style.display = "hidden";
+    document.getElementById("status-lose-player").style.display = "hidden";
+    document.getElementById("status-win-dealer").style.display = "hidden";
+    document.getElementById("status-lose-dealer").style.display = "hidden";
+    document.getElementById("status-draw").style.display = "hidden";
 };
-//     var points = document.createElement("div");
-//     var status  = document.createElement("div");
-
-//     points.className = "points";
-//     status.className = "status";
-
-//     document.getElementById('deck').appendChild(points);
-//     document.getElementById('deck').appendChild(status);
-//     document.getElementById("status").style.display = "none";
-
-//     // pointsUI.id = "pointsUI";
-//     // statusUI.id = "statusUI";
-
 
 /////////////////////////////////////////////////
 ///Testing Functions (For card reference only)///

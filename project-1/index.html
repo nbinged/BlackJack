@@ -26,38 +26,46 @@
         <h1> Blackjack</h1>
     </header>
 
-    <nav>
-        <!-- <a href="#">Instructions</a> -->
-    </nav>
+<!--     <nav>
+        <a href="#">Instructions</a>
+    </nav> -->
 
 <div class="container-fluid">
 
     <div class="row" id="deck-row">
-        <div class="col-5" id="player-deck"></div>
-        <div class="col-5" id="dealer-deck"></div>
+        <div class="col-5" id="player-deck">
+            <div class="row" id="player-UI">
+            <div id="player" style="display:block"></div>
+            <div id="points" style="display:none"> </div>
+            <div id="status-win-player" style="display:none"></div>
+            <div id="status-lose-player" style="display:none"></div>
+            <div id="status-draw" style="display:none"></div>
+            <div id="Money" style="display:none">Money: </div>
+            </div>
+        </div>
+
+        <div class="col-5" id="dealer-deck">
+            <div class="row" id="dealer-UI">
+            <div id="player-dealer" style="display:block"></div>
+            <div id="status-win-dealer" style="display:none"></div>
+            <div id="status-lose-dealer" style="display:none"></div>
+            <div id="dealer-points" style="display:none"></div>
+            </div>
+        </div>
     </div>
 
                 <!-- <h1 id="instructions">&darr; <span style="">Instructions</span> &darr;</h1> -->
 
                 <!-- <p>Short paragraph on how to play here</p> -->
 
-            <div class="row" id="player-UI">
-                <div id="points" style="display:none">Points: </div>
-                <div id="status-win" style="display:none"></div>
-                <div id="status-lose" style="display:none"></div>
-            </div>
-
-<!--             <div class="row" id="dealer-UI">
-                <div id="points" style="display:none">Points: </div>
-                <div id="status-win" style="display:none"></div>
-                <div id="status-lose" style="display:none"></div>
-            </div> -->
-
         <div class="button-row">
+            <h1 class="player-bar">PLAYER</h1>
+            <div id="points" style="display:none">Points: </div>
             <input type="button" id="btn-start" class="button" style="display:block;"value="START" onclick="startGame()"/>
             <input type="button" id="btn-hit" class="button" style="display:none;" value="HIT ME!" onclick="hitMe()" />
             <input type="button" id="btn-stand" class="button" style="display:none;" value="STAND" onclick="stand()"/>
-            <input type="button" id="btn-restart" class="button" style="display:none;" value="RESTART" onclick="restart()"/>
+            <input type="button" id="btn-restart" class="button" style="display:none;" value="SURRENDER" onclick="restart()"/>
+            <h1 class="dealer-bar">DEALER</h1>
         </div>
 </div>
 

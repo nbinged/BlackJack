@@ -5,14 +5,14 @@ padding: 8px;
 text-align: center;
 }
 
-nav {
+/*nav {
 background-color: #3F5450;
 color: #FFFFFF;
 padding: 4px;
 text-align: center;
 border-bottom: 3px black solid;
 margin-bottom: 30px;
-}
+}*/
 
 /*a {
 margin: 0 20px;
@@ -33,11 +33,16 @@ color: #EB8686;
 h1 {
 font-family: century-gothic;
 font-weight: bold;
+color: white;
+border: solid black;
+background: black;
+padding: 5px;
 }
 
 body {
 background: url("images/background.png") no-repeat center center fixed;
 background-size: cover;
+text-align: center;
 }
 
 footer {
@@ -57,7 +62,7 @@ max-height:201px;
 .container-fluid {
 }
 
-.card
+.cardDiv
 {
 padding: 1px;
 border: solid 1px #808080;
@@ -66,8 +71,9 @@ display: inline-block;
 border-radius: 10px;
 color:black;
 margin: 3px;
-margin-top: 70px;
-margin-bottom: 50px;
+margin-top: 50px;
+margin-left: 30px;
+margin-right: 20px;
 }
 
 /*#instructions {
@@ -82,7 +88,7 @@ text-align: center;
 
 #deck-row {
 margin: 0 auto;
-margin-top: 40px;
+margin-top: 100px;
 text-align: center;
 justify-content: space-evenly;
 }
@@ -106,12 +112,12 @@ background-color: #3F5450;
 }
 
 #dealer-UI {
-min-width: 590px;
+min-width: 595px;
 display: block;
 }
 
 #player-UI {
-min-width: 590px;
+min-width: 595px;
 display: block;
 }
 
@@ -120,9 +126,11 @@ font-weight: bold;
 color: #FFFFFF;
 text-align: center;
 font-size: 20pt;
+border-left: 0px;
+border-right: 0px;
 }
 
-#status-win {
+#status-win-player {
 font-weight: bold;
 color: #FFFFFF;
 text-align: center;
@@ -132,9 +140,11 @@ border-color: black;
 border-style: solid;
 padding: 5px;
 border-width: 3px;
+position: absolute;
+min-width: 100%;
 }
 
-#status-lose {
+#status-lose-player {
 font-weight: bold;
 color: #FFFFFF;
 text-align: center;
@@ -144,6 +154,48 @@ border-color: black;
 border-style: solid;
 padding: 5px;
 border-width: 3px;
+position: absolute;
+min-width: 100%;
+}
+
+#status-win-dealer {
+font-weight: bold;
+color: #FFFFFF;
+text-align: center;
+font-size: 20pt;
+background: maroon;
+border-color: black;
+border-style: solid;
+padding: 5px;
+border-width: 3px;
+position: absolute;
+min-width: 100%;
+}
+
+#status-lose-dealer {
+font-weight: bold;
+color: #FFFFFF;
+text-align: center;
+font-size: 20pt;
+background: green;
+border-color: black;
+border-style: solid;
+padding: 5px;
+border-width: 3px;
+position: absolute;
+min-width: 100%;
+}
+
+#points {
+border: solid 3px;
+border-bottom: 0px;
+border-color: black;
+background-color: #EB8585;
+color: white;
+position: absolute; bottom: 0;
+text-align: center;
+padding: 5px;
+min-width: 100%;
 }
 
 .button-row {
@@ -155,8 +207,8 @@ display:flex;
 
 .button {
 display: inline-block;
-padding: 10px 20px;
-font-size: 20px;
+padding: 20px 30px;
+font-size: 30px;
 cursor: pointer;
 text-align: center;
 text-decoration: none;
@@ -188,5 +240,22 @@ background-color: blue;
 }
 
 #btn-restart {
-background-color: green;
+background-color: white;
+color: black;
+}
+
+.player-bar {
+background: green;
+position: fixed;
+left: 0;
+padding:10px;
+/*padding-left: 100px;*/
+}
+
+.dealer-bar {
+background: maroon;
+position: fixed;
+right: 0;
+padding:10px;
+/*padding-right: 100px;*/
 }

@@ -3,7 +3,7 @@ console.log("Hello script.js");
 /////////////////////
 //Global Variables://
 /////////////////////
-var player = {cards: [], score: 0, money: 0}
+var player = {cards: [], score: 0, money: 100}
 var dealer = {cards: [], score: 0}
 var numCardsPulled = 0;
 
@@ -15,7 +15,7 @@ var startGame = function(event) {
     hideStartBtn();
     showHitBtn();
     showStandBtn();
-    showRestartBtn();
+    showSurrenderBtn();
     shuffle();
     playerCards();
     playerCards();
@@ -23,6 +23,7 @@ var startGame = function(event) {
     dealerCover();
     putPlayerUI();
     document.getElementById("dealer-points").style.display = "block";
+    document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
 }
 
 ///////////////////////
@@ -227,12 +228,11 @@ var hitDealer = function() {
 // Function stand ends player turn and move on to dealer's turn
 var stand = function(event) {
 
-        while (dealer.score < 17) {
-        hitDealer();
-        dealerScoreCheck();
-        checkWin();
+    while (dealer.score < 17) {
+    hitDealer();
+    dealerScoreCheck();
     }
-    // cardImg.src = dealer.cards[1].Cardimage;
+    checkWin();
 }
 
 var checkWin = function() {
@@ -243,8 +243,12 @@ var checkWin = function() {
         document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         document.getElementById("status-win-dealer").style.display = "block";
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+
         hideHitBtn();
         hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
+        bet("lose");
 
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;;
@@ -258,12 +262,16 @@ var checkWin = function() {
         document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
         document.getElementById("status-lose-dealer").style.display = "block";
         document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
-        hideHitBtn();
-        hideStandBtn();
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("dealer-points").style.backgroundColor = "green";
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+        bet("win");
     }
 
     else if (dealer.score > 21) {
@@ -272,13 +280,17 @@ var checkWin = function() {
         document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
         document.getElementById("status-lose-dealer").style.display = "block";
         document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
-        hideHitBtn();
-        hideStandBtn();
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
-        document.getElementById("points").style.backgroundColor = "maroon";
+        document.getElementById("points").style.backgroundColor = "green";
+        document.getElementById("dealer-points").style.backgroundColor = "green";
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+        bet("win");
     }
 
     else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
@@ -287,45 +299,88 @@ var checkWin = function() {
         document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         document.getElementById("status-win-dealer").style.display = "block";
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
-        hideHitBtn();
-        hideStandBtn();
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
         document.getElementById("points").style.backgroundColor = "maroon";
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
+        bet("lose");
     }
 
-    else if (player.score > dealer.score) {
+    else if (player.score > dealer.score && dealer.score < player.score) {
         console.log("You Win! YAY! :)");
         document.getElementById("status-win-player").style.display = "block";
         document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
         document.getElementById("status-lose-dealer").style.display = "block";
         document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
-        hideHitBtn();
-        hideStandBtn();
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("dealer-points").style.backgroundColor = "green";
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
+        bet("win");
     }
 
-    else if (player.score < dealer.score) {
+    else if (dealer.score > player.score && player.score < dealer.score) {
         console.log("You lose :(");
         document.getElementById("status-lose-player").style.display = "block";
         document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         document.getElementById("status-win-dealer").style.display = "block";
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
-        hideHitBtn();
-        hideStandBtn();
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
         document.getElementById("points").style.backgroundColor = "maroon";
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+        bet("lose");
     }
 
+       else if (player.score === dealer.score) {
+        console.log("ITS A DRAW!");
+        document.getElementById("status-draw").style.display = "block";
+        document.getElementById("status-draw").innerHTML = "ITS A DRAW!";
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("points").style.backgroundColor = "blue";
+        document.getElementById("dealer-points").style.backgroundColor = "blue";
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+    }
+
+    else if (player.money === 0) {
+        showSurrenderBtn();
+        hideRestartBtn();
+        document.getElementById("message-board").innerHTML = "You lost!" + "<br>" + "You are out of money";
+        }
+
+    document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
 };
+
+var bet = function(outcome) {
+    var playerBet = document.getElementById("bet").valueAsNumber;
+    if (outcome === "win") {
+        player.money += playerBet;
+    }
+    if (outcome === "lose") {
+        player.money -= playerBet;
+    }
+}
 
 ///////////////////////////////
 ///GAME BOARD BUTTON TOGGLES///
@@ -362,14 +417,30 @@ var showRestartBtn = function(){
 };
 
 var hideRestartBtn = function(){
-    var restartBtn  = document.querySelector('#btn-restart');
+    var surrenderBtn  = document.querySelector('#btn-surrender');
     document.getElementById("btn-restart").style.display = "none";
+    console.log("hide 'surrenderBtn' button");
+};
+
+var showSurrenderBtn = function(){
+    var surrenderBtn  = document.querySelector('#btn-surrender');
+    document.getElementById("btn-surrender").style.display = "block";
+    console.log("show 'surrenderBtn' button");
+};
+
+var hideSurrenderBtn = function(){
+    var restartBtn  = document.querySelector('#btn-restart');
+    document.getElementById("btn-surrender").style.display = "none";
     console.log("hide 'RESTART' button");
 };
 
-var restart = function(event) {
-location.reload();
+var surrender = function(event) {
+    location.reload();
 };
+
+var restart = function(event) {
+    location.reload();
+}
 
 var hidePressStart = function() {
     document.getElementById("press-start").style.display = "none";

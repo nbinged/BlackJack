@@ -1,4 +1,4 @@
-var cards = [
+var deck = [
 //Hearts Suit//
 {
 Value: "A",

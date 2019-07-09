@@ -3,8 +3,9 @@ console.log("Hello script.js");
 /////////////////////
 //Global Variables://
 /////////////////////
-var deck = new Array();
-var playersHand = [];
+var player = {cards: [], score: 0}
+var dealer = {cards: [], score: 0}
+var numCardsPulled = 0;
 
 /////////////////////
 //Starting the game//
@@ -13,12 +14,13 @@ var startGame = function(event) {
 
     hideStartBtn();
     showHitBtn();
+    showStandBtn();
     showRestartBtn();
     shuffle();
-    dealCards();
-    hidePressStart();
-    putPlayerUI();
-    // showStayBtn();
+    playerCards();
+    playerCards();
+    dealerCards();
+    // putPlayerUI();
 }
 
 ///////////////////////
@@ -28,140 +30,219 @@ var startGame = function(event) {
 //Shuffles deck at the start of the game.
 var shuffle = function() {
 
-    for (i = 0; i < 200; i++) {
+    for (i = 0; i < 2000; i++) {
 
-        var cut1 = Math.floor((Math.random() * cards.length));
-        var cut2 = Math.floor((Math.random() * cards.length));
-        var temp = cards[cut1];
+        var cut1 = Math.floor((Math.random() * deck.length));
+        var cut2 = Math.floor((Math.random() * deck.length));
+        var temp = deck[cut1];
 
-        cards[cut1] = cards[cut2];
-        cards[cut2] = temp;
+        deck[cut1] = deck[cut2];
+        deck[cut2] = temp;
     }
-    console.log(cards);
+    console.log(deck);
 };
 
-var scoreCheck = function() {
+////////////////////
+///Game Functions///
+////////////////////
+
+var playerScoreCheck = function() {
 // To sum up the value of playerCards' array.
-    var sum = 0;
-    var pictureCount = 0;
     var aceCount = 0;
+    player.score = 0;
 
-    for (i = 0; i < playersHand.length; i++) {
+    for (i = 0; i < player.cards.length; i++) {
 
-        if (playersHand[i].Value === "J" || playersHand[i].Value === "Q" || playersHand[i].Value === "K") {
+        console.log("Value of "+i);
+        if (player.cards[i].Value === "J" || player.cards[i].Value === "Q" || player.cards[i].Value === "K") {
 
-            sum += 10;
-            pictureCount += 1;
-            console.log("Added picture-card. Current score: "+sum)
+            player.score += 10;
+            console.log("Added picture-card. Player's current score: "+player.score)
         }
 
-        else if (playersHand[i].Value === "A") {
+        else if (player.cards[i].Value === "A") {
 
-            sum += 11;
+            player.score += 11;
             aceCount += 1;
-            console.log("Added Ace-card. Current score: "+sum)
+            console.log("Added Ace-card. Player's current score: "+player.score)
         }
 
         else {
-            sum += (parseInt(playersHand[i].Value));
-            console.log("Added another card. Current score: "+sum)
+            player.score += (parseInt(player.cards[i].Value));
+            console.log("Added another card. Player's current score: "+player.score)
+        }
+}
+
+    if (aceCount > 0 && (player.score > 21)) {
+            player.score -=10;
+            aceCount -= 1;
+        console.log("Ace taken as '1'. Player's current score is "+player.score);
+        console.log(aceCount)
+        }
+
+    document.getElementById('points').innerHTML = "Points: "+player.score;
+};
+
+var dealerScoreCheck = function() {
+// To sum up the value of playerCards' array.
+    var aceCount = 0;
+    dealer.score = 0;
+
+    for (i = 0; i < dealer.cards.length; i++) {
+
+        if (dealer.cards[i].Value === "J" || dealer.cards[i].Value === "Q" || dealer.cards[i].Value === "K") {
+
+            dealer.score += 10;
+            console.log("Added picture-card. Dealer's current score: "+dealer.score)
+        }
+
+        else if (dealer.cards[i].Value === "A") {
+
+            dealer.score += 11;
+            aceCount += 1;
+            console.log("Added Ace-card. Dealer's current score: "+dealer.score)
+        }
+
+        else {
+            dealer.score += (parseInt(dealer.cards[i].Value));
+            console.log("Added another card. Dealer's current score: "+dealer.score)
         }
     };
 
-    if (aceCount > 0 && (sum > 21)) {
-            sum -=10;
+    if (aceCount > 0 && (dealer.score > 21)) {
+            dealer.score -=10;
             aceCount -= 1;
-        console.log("Ace taken as '1'. New score is "+sum);
+        console.log("Ace taken as '1'. Dealer's score is "+dealer.score);
         console.log(aceCount)
     }
 
-    if (sum > 21) {
-        console.log("You lose :(");
-        document.getElementById("status-lose").style.display = "block";
-        document.getElementById("status-lose").innerHTML = "YOU LOSE! :(";
-        hideHitBtn();
-
-    }
-
-    else if (sum === 21 || (playersHand.length === 7 && sum < 21)) {
-        console.log("You Win! YAY! :)");
-        document.getElementById("status-win").style.display = "block";
-        document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
-        hideHitBtn();
-    }
-
-    document.getElementById('points').innerHTML = "Points: "+sum;
-};
+    document.getElementById('points').innerHTML = "Points: "+dealer.score;
+}
 
 //DealCards, give player their starting 2 cards.
-var dealCards = function() {
+var playerCards = function() {
+
+    player.cards.push(deck[numCardsPulled]);
+
+        var cardDiv = document.createElement("div");
+        var cardImg  = document.createElement("img");
+
+        //Player's Hand:
+        console.log("Player received card:")
+        console.log(deck[numCardsPulled]);
+
+        cardDiv.className = "cardDiv";
+        cardImg.src = player.cards[numCardsPulled].Cardimage;
+
+        cardDiv.appendChild(cardImg);
+        document.getElementById('player-deck').appendChild(cardDiv);
+
+        playerScoreCheck();
+        numCardsPulled += 1;
+}
+
+var dealerCards = function() {
 
     for (var i = 0; i < 2; i++) {
 
-        var card = document.createElement("div");
+        var cardDiv = document.createElement("div");
         var cardImg  = document.createElement("img");
 
-            playersHand.push(cards[i]);
-            card.className = "card";
-            cardImg.src = playersHand[i].Cardimage;
+        var dealtCard = deck.pop();
+        dealer.cards.push(dealtCard);
 
-            card.appendChild(cardImg);
-            document.getElementById('deck').appendChild(card);
+        console.log("Dealer received card:")
+        console.log(dealtCard);
 
-            scoreCheck();
+        cardDiv.className = "cardDiv";
+        cardImg.src = dealtCard.Cardimage;
+
+        cardDiv.appendChild(cardImg);
+        document.getElementById('dealer-deck').appendChild(cardDiv);
+
+        dealerScoreCheck();
     }
-};
-
-// var createUI = function() {
-
-//     document.getElementById('players').innerHTML = '';
-
-//         var div_player = document.createElement('div');
-//         var div_playerid = document.createElement('div');
-//         var div_hand = document.createElement('div');
-//         var div_points = document.createElement('div');
-
-//         div_points.className = 'points';
-//         div_points.id = 'points_' + i;
-//         div_player.id = 'player_' + i;
-//         div_player.className = 'player';
-//         div_hand.id = 'hand_' + i;
-
-//         div_playerid.innerHTML = players[i].ID;
-//         div_player.appendChild(div_playerid);
-//         div_player.appendChild(div_hand);
-//         div_player.appendChild(div_points);
-//         document.getElementById('players').appendChild(div_player);
-// }
+}
 
 // HitMe, Adds an extra card to the player's array.
 var hitMe = function(event) {
 
-    var card = document.createElement("div");
+    var cardDiv = document.createElement("div");
     var cardImg  = document.createElement("img");
-    // var x = (Math.floor(Math.random() * cards.length));
 
-        for (var x = 0; x < playersHand.length; x++)
+        for (var x = 1; x < player.cards.length; x++)
 
-        var dealtCard = cards.pop();
-        playersHand.push(dealtCard);
+        var dealtCard = deck.pop();
+        player.cards.push(dealtCard);
 
-        card.className = "card";
-        cardImg.src = playersHand[x].Cardimage;
+        cardDiv.className = "cardDiv";
+        cardImg.src = player.cards[x].Cardimage;
 
-        card.appendChild(cardImg);
-        document.getElementById('deck').appendChild(card);
+        cardDiv.appendChild(cardImg);
+        document.getElementById('player-deck').appendChild(cardDiv);
 
-        scoreCheck();
-
-            // // Stay, End the game and check how many points the player has.
-            // var stay = function(event) {
-
-            //     if (sum < 21) {
-            //     console.log("You lose :(");
-            //     }
-            // }
+        playerScoreCheck();
 };
+
+var hitDealer = function() {
+
+    var cardDiv = document.createElement("div");
+    var cardImg  = document.createElement("img"); {
+
+        // while (dealer.score < 17) {
+
+        var dealtCard = deck.pop();
+        dealer.cards.push(dealtCard);
+
+        cardDiv.className = "cardDiv";
+        cardImg.src = dealer.cards[x].Cardimage;
+
+        cardDiv.appendChild(cardImg);
+        document.getElementById('dealer-deck').appendChild(cardDiv);}
+
+        dealerScoreCheck();
+    // }
+}
+
+// Function stand ends player turn and move on to dealer's turn
+var stand = function(event) {
+
+        while (dealer.score < 17) {
+        hitDealer();
+        dealerScoreCheck();
+    }
+}
+
+//Function checkWin
+
+    // if (player.score > 21) {
+    //     console.log("You lose :(");
+    //     document.getElementById("status-lose").style.display = "block";
+    //     document.getElementById("status-lose").innerHTML = "HOUSE WINS! YOU LOSE! :(";
+    //     hideHitBtn();
+
+    // }
+
+    // else if (player.score === 21 || (player.cards.length === 5 && player.score < 21)) {
+    //     console.log("You Win! YAY! :)");
+    //     document.getElementById("status-win").style.display = "block";
+    //     document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
+    //     hideHitBtn();
+    // }
+
+    //     if (dealer.score > 21) {
+    //     console.log("You lose :(");
+    //     document.getElementById("status-lose").style.display = "block";
+    //     document.getElementById("status-lose").innerHTML = "HOUSE WINS! YOU LOSE! :(";
+    //     hideHitBtn();
+    // }
+
+    // else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
+    //     console.log("You Win! YAY! :)");
+    //     document.getElementById("status-win").style.display = "block";
+    //     document.getElementById("status-win").innerHTML = "You Win! YAY! :)";
+    //     hideHitBtn();
+    // }
 
 ///////////////////////////////
 ///GAME BOARD BUTTON TOGGLES///
@@ -209,19 +290,19 @@ location.reload();
 
 var hidePressStart = function() {
     document.getElementById("press-start").style.display = "none";
-}
+};
 
-// var showStayBtn = function(){
-//       var startButton = document.querySelector('#btn-stay');
-//       document.getElementById("btn-stay").style.display = "block";
-//       console.log("show 'STAY' button");
-// };
+var showStandBtn = function(){
+      var startButton = document.querySelector('#btn-stand');
+      document.getElementById("btn-stand").style.display = "block";
+      console.log("show 'STAND' button");
+};
 
-// var hideStayBtn = function(){
-//       var startButton = document.querySelector('#btn-stay');
-//       document.getElementById("btn-stay").style.display = "none";
-//       console.log("hide 'STAY' button");
-// };
+var hideStandBtn = function(){
+      var startButton = document.querySelector('#btn-stay');
+      document.getElementById("btn-stay").style.display = "none";
+      console.log("hide 'STAND' button");
+};
 
 ////////////////////
 //Game UI elements//
@@ -230,13 +311,20 @@ var putPlayerUI = function() {
 
     document.getElementById("points").style.display = "block";
     document.getElementById("status").style.display = "hidden";
+};
+//     var points = document.createElement("div");
+//     var status  = document.createElement("div");
 
-    // var pointsUI = document.createElement("div");
-    // var statusUI  = document.createElement("div");
+//     points.className = "points";
+//     status.className = "status";
 
-    // pointsUI.id = "pointsUI";
-    // statusUI.id = "statusUI";
-}
+//     document.getElementById('deck').appendChild(points);
+//     document.getElementById('deck').appendChild(status);
+//     document.getElementById("status").style.display = "none";
+
+//     // pointsUI.id = "pointsUI";
+//     // statusUI.id = "statusUI";
+
 
 /////////////////////////////////////////////////
 ///Testing Functions (For card reference only)///
@@ -246,19 +334,19 @@ var putPlayerUI = function() {
 
 //     document.getElementById('deck').innerHTML = '';
 
-//     for (var i = 0; i < cards.length; i++)
+//     for (var i = 0; i < deck.length; i++)
 //     {
 //         var card = document.createElement("div");
 //         var cardImg  = document.createElement("img");
 //         card.className = "card";
-//         cardImg.src = cards[i].Cardimage;
+//         cardImg.src = deck[i].Cardimage;
 //         // var value = document.createElement("div");
 //         // var suit = document.createElement("div");
 //         // value.className = "value";
 //         // suit.className = "suit";
 
-//         // value.innerHTML= cards[i].Value;
-//         // suit.innerHTML = cards[i].Suit;
+//         // value.innerHTML= deck[i].Value;
+//         // suit.innerHTML = deck[i].Suit;
 //         // card.appendChild(value);
 //         // card.appendChild(suit);
 //         card.appendChild(cardImg);

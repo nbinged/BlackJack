@@ -8,12 +8,13 @@ text-align: center;
 nav {
 background-color: #3F5450;
 color: #FFFFFF;
-padding: 3px;
+padding: 4px;
 text-align: center;
 border-bottom: 3px black solid;
+margin-bottom: 30px;
 }
 
-a {
+/*a {
 margin: 0 20px;
 font-family: "Raleway";
 letter-spacing: 1px;
@@ -22,11 +23,12 @@ font-size: 15px;
 text-transform: uppercase;
 color: #FFFFFF;
 border-bottom: 2px solid transparent;
-}
+}*/
 
-a:hover {
+/*a:hover {
 color: #EB8686;
 }
+*/
 
 h1 {
 font-family: century-gothic;
@@ -34,8 +36,8 @@ font-weight: bold;
 }
 
 body {
-background-color: #EB8686;
-
+background: url("images/background.png") no-repeat center center fixed;
+background-size: cover;
 }
 
 footer {
@@ -53,19 +55,95 @@ max-height:201px;
 }
 
 .container-fluid {
-background: url("images/background.png") no-repeat center center fixed;
-background-size: cover;
-min-height: 600px;
-padding: 100px;
 }
 
-.col-6 {
-min-height: 500px;
-min-width: 1200px;
-background-color: #3F5450;
-border: solid black;
-margin: 0 auto;
+.card
+{
+padding: 1px;
+border: solid 1px #808080;
+background-color: white;
+display: inline-block;
+border-radius: 10px;
+color:black;
+margin: 3px;
+margin-top: 70px;
+margin-bottom: 50px;
+}
+
+/*#instructions {
+font-weight: bold;
+color: #FFFFFF;
+padding: 220px 0;
 text-align: center;
+}*/
+
+#container-fluid {
+}
+
+#deck-row {
+margin: 0 auto;
+margin-top: 40px;
+text-align: center;
+justify-content: space-evenly;
+}
+
+#player-deck {
+min-width: 400px;
+min-height: 600px;
+display: inline-block;
+border: solid black;
+text-align: left;
+background-color: #3F5450;
+}
+
+#dealer-deck {
+min-width: 400px;
+min-height: 600px;
+display: inline-block;
+border: solid black;
+text-align: right;
+background-color: #3F5450;
+}
+
+#dealer-UI {
+min-width: 590px;
+display: block;
+}
+
+#player-UI {
+min-width: 590px;
+display: block;
+}
+
+#points {
+font-weight: bold;
+color: #FFFFFF;
+text-align: center;
+font-size: 20pt;
+}
+
+#status-win {
+font-weight: bold;
+color: #FFFFFF;
+text-align: center;
+font-size: 20pt;
+background: green;
+border-color: black;
+border-style: solid;
+padding: 5px;
+border-width: 3px;
+}
+
+#status-lose {
+font-weight: bold;
+color: #FFFFFF;
+text-align: center;
+font-size: 20pt;
+background: maroon;
+border-color: black;
+border-style: solid;
+padding: 5px;
+border-width: 3px;
 }
 
 .button-row {
@@ -93,17 +171,6 @@ font-family: "arial";
 font-weight: bold;
 }
 
-.card
-{
-padding: 1px;
-border: solid 1px #808080;
-background-color: white;
-display: inline-block;
-border-radius: 10px;
-color:black;
-margin: 3px;
-}
-
 .button:hover {background-color: #3e8e41}
 
 .button:active {
@@ -116,46 +183,10 @@ transform: translateY(4px);
 background-color: red;
 }
 
-#btn-stay {
+#btn-stand {
 background-color: blue;
 }
 
 #btn-restart {
 background-color: green;
-}
-
-#press-start {
-font-weight: bold;
-color: #FFFFFF;
-padding: 220px 0;
-text-align: center;
-}
-
-#points {
-font-weight: bold;
-color: #FFFFFF;
-text-align: center;
-font-size: 20pt;
-}
-
-#status-win {
-font-weight: bold;
-color: #FFFFFF;
-text-align: center;
-font-size: 20pt;
-background: green;
-border-color: black;
-border-style: solid;
-padding: 5px;
-}
-
-#status-lose {
-font-weight: bold;
-color: #FFFFFF;
-text-align: center;
-font-size: 20pt;
-background: maroon;
-border-color: black;
-border-style: solid;
-padding: 5px;
 }

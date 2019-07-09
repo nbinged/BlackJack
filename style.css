@@ -37,6 +37,18 @@ color: white;
 border: solid black;
 background: black;
 padding: 5px;
+text-align: center;
+}
+
+h2 {
+font-family: century-gothic;
+font-weight: bold;
+color: white;
+border: solid black;
+background: black;
+padding: 5px;
+text-align: center;
+border-top:0px;
 }
 
 body {
@@ -57,6 +69,7 @@ overflow: hidden;
 img {
 max-width:144px;
 max-height:201px;
+margin-top:1px;
 }
 
 .container-fluid {
@@ -64,7 +77,6 @@ max-height:201px;
 
 .cardDiv
 {
-padding: 1px;
 border: solid 1px #808080;
 background-color: white;
 display: inline-block;
@@ -190,17 +202,31 @@ min-width: 100%;
 border: solid 3px;
 border-bottom: 0px;
 border-color: black;
-background-color: #EB8585;
+background-color: green;
 color: white;
 position: absolute; bottom: 0;
 text-align: center;
 padding: 5px;
 min-width: 100%;
+font-size: 20pt;
+}
+
+#dealer-points {
+border: solid 3px;
+border-bottom: 0px;
+border-color: black;
+background-color: maroon;
+color: white;
+position: absolute; bottom: 0;
+text-align: center;
+padding: 5px;
+min-width: 100%;
+font-size: 20pt;
+font-weight: bold;
 }
 
 .button-row {
 justify-content: center;
-align-content: center;
 align-items: center;
 display:flex;
 }
@@ -246,16 +272,26 @@ color: black;
 
 .player-bar {
 background: green;
-position: fixed;
-left: 0;
 padding:10px;
-/*padding-left: 100px;*/
+min-width: 100%;
 }
 
 .dealer-bar {
 background: maroon;
-position: fixed;
-right: 0;
 padding:10px;
-/*padding-right: 100px;*/
+min-width: 100%;
+}
+
+#red-lose {
+border: solid 3px;
+border-bottom: 0px;
+border-color: black;
+background-color: maroon;
+color: white;
+position: absolute; bottom: 0;
+text-align: center;
+padding: 5px;
+min-width: 100%;
+font-size: 20pt;
+font-weight: bold;
 }

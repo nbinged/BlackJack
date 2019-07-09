@@ -3,7 +3,7 @@ console.log("Hello script.js");
 /////////////////////
 //Global Variables://
 /////////////////////
-var player = {cards: [], score: 0}
+var player = {cards: [], score: 0, money: 0}
 var dealer = {cards: [], score: 0}
 var numCardsPulled = 0;
 
@@ -22,6 +22,7 @@ var startGame = function(event) {
     dealerCards();
     dealerCover();
     putPlayerUI();
+    document.getElementById("dealer-points").style.display = "block";
 }
 
 ///////////////////////
@@ -176,6 +177,7 @@ var dealerCover = function() {
         console.log(dealtCard);
 
         cardDiv.className = "cardDiv";
+        cardImg.id ="cover";
         cardImg.src = "images/back.png";
 
         cardDiv.appendChild(cardImg);
@@ -228,8 +230,9 @@ var stand = function(event) {
         while (dealer.score < 17) {
         hitDealer();
         dealerScoreCheck();
-        checkWin()
+        checkWin();
     }
+    // cardImg.src = dealer.cards[1].Cardimage;
 }
 
 var checkWin = function() {
@@ -242,9 +245,14 @@ var checkWin = function() {
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;;
+        document.getElementById("points").style.backgroundColor = "maroon";
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
-    else if (player.score === 21 || (player.cards.length === 6 && player.score < 21)) {
+    else if (player.score === 21 || (player.cards.length === 5 && player.score < 21)) {
         console.log("You Win! YAY! :)");
         document.getElementById("status-win-player").style.display = "block";
         document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
@@ -252,26 +260,40 @@ var checkWin = function() {
         document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
     else if (dealer.score > 21) {
-        console.log("You lose :(");
+        console.log("You Win! YAY! :)");
         document.getElementById("status-win-player").style.display = "block";
-        document.getElementById("status-win-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-win-player").innerHTML = "You Win! YAY! :)";
         document.getElementById("status-lose-dealer").style.display = "block";
-        document.getElementById("status-lose-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
+        document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("points").style.backgroundColor = "maroon";
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
-    else if (dealer.score === 21 || (dealer.cards.length === 6 && dealer.score < 21)) {
-        console.log("You Win! YAY! :)");
+    else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
+        console.log("HOUSE WINS! YOU LOSE! :'(");
         document.getElementById("status-lose-player").style.display = "block";
         document.getElementById("status-lose-player").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         document.getElementById("status-win-dealer").style.display = "block";
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("points").style.backgroundColor = "maroon";
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
     else if (player.score > dealer.score) {
@@ -282,6 +304,10 @@ var checkWin = function() {
         document.getElementById("status-lose-dealer").innerHTML = "You Win! YAY! :)";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
     else if (player.score < dealer.score) {
@@ -292,6 +318,11 @@ var checkWin = function() {
         document.getElementById("status-win-dealer").innerHTML = "HOUSE WINS! YOU LOSE! :'(";
         hideHitBtn();
         hideStandBtn();
+
+        document.getElementById("dealer-points").style.display = "block";
+        document.getElementById('dealer-points').innerHTML = "Points: "+dealer.score;
+        document.getElementById("points").style.backgroundColor = "maroon";
+        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
     }
 
 };

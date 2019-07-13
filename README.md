@@ -1,6 +1,6 @@
 Title: BlackJack
 
-Url: https://nbinged.github.io/sei-19/
+Url: https://nbinged.github.io/BlackJack/
 
 This is a dynamic online recreation of the globally popular card game which is only known as Twenty One or BlackJack. One of most widely played casino banking game in the world. 
 

@@ -21,6 +21,7 @@ var startGame = function(event) {
     dealerCards();
     dealerCover();
     putPlayerUI();
+    hideBettingBtn();
 }
 
 ///////////////////////
@@ -245,6 +246,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         bet("win");
+        showBettingBtn();
     }
 
     else if (dealer.score > 21) {
@@ -255,6 +257,8 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         bet("win");
+        showBettingBtn();
+
     }
 
     else if (player.score > dealer.score && player.score < 21) {
@@ -265,6 +269,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn()
         bet("win");
+            showBettingBtn();
     }
 
     else if (player.score > 21) {
@@ -275,6 +280,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn()
         bet("lose");
+        showBettingBtn();
     }
 
     else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
@@ -285,6 +291,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn()
         bet("lose");
+        showBettingBtn();
     }
 
     else if (dealer.score > player.score) {
@@ -295,6 +302,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         bet("lose");
+        showBettingBtn();
     }
 
        else if (player.score === dealer.score) {
@@ -304,6 +312,7 @@ var checkWin = function() {
         hideStandBtn();
         hideSurrenderBtn();
         showRestartBtn();
+        showBettingBtn();
     }
 
     document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
@@ -332,6 +341,7 @@ var downOnLuck = function() {
 
         showSurrenderBtn();
         hideRestartBtn();
+        hideBettingBtn();
         document.getElementById("status-lose").innerHTML = "You lost! You are out of money! :'(";
     }
 };
@@ -678,6 +688,7 @@ var restart = function(event) {
     showHitBtn();
     showStandBtn();
     showSurrenderBtn();
+    hideBettingBtn();
 
     shuffle();
     playerCards();
@@ -753,6 +764,16 @@ var hideStandBtn = function(){
       var startButton = document.querySelector('#btn-stand');
       document.getElementById("btn-stand").style.display = "none";
       console.log("hide 'STAND' button");
+};
+
+var hideBettingBtn = function(){
+      document.getElementById("betting").style.display = "none";
+      console.log("hide 'betting' button");
+};
+
+var showBettingBtn = function(){
+      document.getElementById("betting").style.display = "block";
+      console.log("show 'betting' button");
 };
 
 ////////////////////

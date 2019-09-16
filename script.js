@@ -3,7 +3,7 @@ console.log("Hello script.js");
 /////////////////////
 //Global Variables://
 /////////////////////
-var player = {cards: [], score: 0, money: 100}
+var player = {cards: [], score: 0, money: 100, bet: 0}
 var dealer = {cards: [], score: 0}
 var numCardsPulled = 0;
 
@@ -22,6 +22,7 @@ var startGame = function(event) {
     dealerCover();
     putPlayerUI();
     hideBettingBtn();
+    showPlayerBet();
 }
 
 ///////////////////////
@@ -247,6 +248,7 @@ var checkWin = function() {
         showRestartBtn();
         bet("win");
         showBettingBtn();
+        hidePlayerBet();
     }
 
     else if (dealer.score > 21) {
@@ -258,6 +260,7 @@ var checkWin = function() {
         showRestartBtn();
         bet("win");
         showBettingBtn();
+        hidePlayerBet();
 
     }
 
@@ -269,7 +272,8 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn()
         bet("win");
-            showBettingBtn();
+        showBettingBtn();
+        hidePlayerBet();
     }
 
     else if (player.score > 21) {
@@ -281,6 +285,7 @@ var checkWin = function() {
         showRestartBtn()
         bet("lose");
         showBettingBtn();
+        hidePlayerBet();
     }
 
     else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
@@ -292,6 +297,7 @@ var checkWin = function() {
         showRestartBtn()
         bet("lose");
         showBettingBtn();
+        hidePlayerBet();
     }
 
     else if (dealer.score > player.score) {
@@ -303,6 +309,7 @@ var checkWin = function() {
         showRestartBtn();
         bet("lose");
         showBettingBtn();
+        hidePlayerBet();
     }
 
        else if (player.score === dealer.score) {
@@ -313,6 +320,7 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         showBettingBtn();
+        hidePlayerBet();
     }
 
     document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
@@ -342,7 +350,7 @@ var downOnLuck = function() {
         showSurrenderBtn();
         hideRestartBtn();
         hideBettingBtn();
-        document.getElementById("status-lose").innerHTML = "You lost! You are out of money! :'(";
+        document.getElementById("status-lose").innerHTML = "You lost! You are out of money! :(";
     }
 };
 
@@ -776,6 +784,14 @@ var showBettingBtn = function(){
       console.log("show 'betting' button");
 };
 
+var showPlayerBet = function(){
+      document.getElementById("player-bet").style.display = "block";
+};
+
+var hidePlayerBet = function(){
+      document.getElementById("player-bet").style.display = "none";
+};
+
 ////////////////////
 //Game UI elements//
 ////////////////////
@@ -791,6 +807,7 @@ var putPlayerUI = function() {
         document.getElementById("points").style.display = "block";
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
+        document.getElementById("player-bet").innerHTML = "Your current bet: $" + (document.getElementById("bet").valueAsNumber);
 };
 
 var winGame = function() {

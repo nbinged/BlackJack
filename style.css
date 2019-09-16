@@ -31,11 +31,10 @@ background-size: cover;
 }
 
 img {
-max-width:108px;
-max-height:158px;
-margin-top:1px;
+max-width:131px;
+max-height:191px;
+/*margin-top:1px;*/
 display: inline-block;
-margin: 3px;
 }
 
 #player-deck {
@@ -63,10 +62,9 @@ background-color: white;
 display: inline-block;
 border-radius: 10px;
 color:black;
-margin: 3px;
-margin-top: 50px;
-margin-left: 30px;
-margin-right: 20px;
+margin-top: 25px;
+margin-left: 5px;
+margin-right: 5px;
 }
 
 #deck-row {
@@ -193,7 +191,6 @@ font-weight: bold;
 
 #money-row {
 justify-content: center;
-display:flex;
 color:white;
 padding-bottom: 40px;
 font-size: 20pt;

@@ -697,6 +697,7 @@ var restart = function(event) {
     showStandBtn();
     showSurrenderBtn();
     hideBettingBtn();
+    showPlayerBet();
 
     shuffle();
     playerCards();

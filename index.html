@@ -32,49 +32,51 @@
 
 <div class="container-fluid">
 
-    <div class="row" id="deck-row">
+        <div class="row" id="deck-row">
 
-        <div class="col-5" id="player-deck">
+                <div class="col-5" id="player-deck">
+                        <h2 class="player-bar">PLAYER</h2>
+                        <div class="cards-div" id="players-cards-div"></div>
 
-                <h2 class="player-bar">PLAYER</h2>
-                <div class="cards-div" id="players-cards-div"></div>
-
-            <div class="row" id="player-UI">
-                <div id="player" style="display:block"></div>
-                <div id="points" style="display:none"></div>
-            </div>
-        </div>
-
-        <div class="col-5" id="dealer-deck">
-                <h2 class="dealer-bar">DEALER</h2>
-
-                <div class="row" id="dealer-UI">
-                    <div class="cards-div" id="dealers-cards-div"></div>
-                    <div id="player-dealer" style="display:block"></div>
-                    <div id="dealer-points" style="display:none">Dealer's Points: ??</div>
+                        <div class="row" id="player-UI">
+                            <div id="player" style="display:block"></div>
+                            <div id="points" style="display:none"></div>
+                        </div>
                 </div>
+
+                <div class="col-5" id="dealer-deck">
+                        <h2 class="dealer-bar">DEALER</h2>
+
+                        <div class="row" id="dealer-UI">
+                            <div class="cards-div" id="dealers-cards-div"></div>
+                            <div id="player-dealer" style="display:block"></div>
+                            <div id="dealer-points" style="display:none">Dealer's Points: ??</div>
+                        </div>
+                </div>
+
         </div>
+
+        <div class="col">
 
             <div class="row" id="game-status">
-                <div id="status-win" style="display:none"></div>
-                <div id="status-lose" style="display:none"></div>
-                <div id="status-draw" style="display:none"></div>
-
+                        <div id="status-win" style="display:none"></div>
+                        <div id="status-lose" style="display:none"></div>
+                        <div id="status-draw" style="display:none"></div>
             </div>
 
-    </div>
+            <div class="row" id="money-row">
+                    <div id=player-money>Your money: $100</div>
+                    <div id="betting">How much do you bet? <input type='number' id='bet' value='10' min='10'/></div>
+            </div>
 
-    <div class="row" id="money-row">
-        <div id=player-money>Your money: $100</div>
-        <div id="betting">How much do you bet? <input type='number' id='bet' value='10' min='10'/></div>
-    </div>
+            <div class="button-row">
+                    <input type="button" id="btn-start" class="button" style="display:block;"value="START" onclick="startGame()"/>
+                    <input type="button" id="btn-hit" class="button" style="display:none;" value="HIT ME!" onclick="hitMe()" />
+                    <input type="button" id="btn-stand" class="button" style="display:none;" value="STAND" onclick="stand()"/>
+                    <input type="button" id="btn-surrender" class="button" style="display:none;" value="SURRENDER" onclick="surrender()"/>
+                    <input type="button" id="btn-restart" class="button" style="display:none;" value="PLAY AGAIN?" onclick="restart()"/>
+            </div>
 
-        <div class="button-row">
-            <input type="button" id="btn-start" class="button" style="display:block;"value="START" onclick="startGame()"/>
-            <input type="button" id="btn-hit" class="button" style="display:none;" value="HIT ME!" onclick="hitMe()" />
-            <input type="button" id="btn-stand" class="button" style="display:none;" value="STAND" onclick="stand()"/>
-            <input type="button" id="btn-surrender" class="button" style="display:none;" value="SURRENDER" onclick="surrender()"/>
-            <input type="button" id="btn-restart" class="button" style="display:none;" value="PLAY AGAIN?" onclick="restart()"/>
         </div>
 </div>
 

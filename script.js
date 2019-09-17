@@ -841,6 +841,7 @@ var winGame = function() {
 var drawGame = function() {
 
         document.getElementById("status-test").innerHTML = "ITS A DRAW!";
+        document.getElementById("status-test").style.backgroundColor = "blue";
 
 };
 

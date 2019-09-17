@@ -121,10 +121,6 @@ var dealerScoreCheck = function() {
         console.log("Ace taken as '1'. Dealer's score is "+dealer.score);
         console.log(aceCount)
     }
-
-    if (dealer.score > 21) {
-        checkWin();
-    }
 }
 
 //DealCards, give player their starting 2 cards.
@@ -232,56 +228,16 @@ var hitDealer = function() {
 // Function stand ends player turn and move on to dealer's turn
 var stand = function(event) {
 
-
     while (dealer.score < 17) {
 
         hitDealer();
         dealerScoreCheck();
-        };
+        }
 
     checkWin();
 }
 
 var checkWin = function() {
-
-    if (player.score > 21 && dealer.score <= 21) {
-
-        loseGame();
-        hideHitBtn();
-        hideStandBtn();
-        hideSurrenderBtn();
-        showRestartBtn()
-        bet("lose");
-    }
-
-    if (dealer.score === 21) {
-
-        loseGame();
-        hideHitBtn();
-        hideStandBtn();
-        hideSurrenderBtn();
-        showRestartBtn()
-        bet("lose");
-    }
-
-    if (dealer.score > player.score && dealer.score <= 21) {
-
-        loseGame();
-        hideHitBtn();
-        hideStandBtn();
-        hideSurrenderBtn();
-        showRestartBtn();
-        bet("lose");
-    }
-
-    if (player.score === dealer.score) {
-
-        drawGame();
-        hideHitBtn();
-        hideStandBtn();
-        hideSurrenderBtn();
-        showRestartBtn();
-    }
 
     if (player.score === 21 || (player.cards.length === 5 && player.score < 21)) {
 
@@ -291,9 +247,12 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         bet("win");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
     }
 
-    if (dealer.score > 21 && player.score <= 21) {
+    else if (dealer.score > 21) {
 
         winGame();
         hideHitBtn();
@@ -301,22 +260,78 @@ var checkWin = function() {
         hideSurrenderBtn();
         showRestartBtn();
         bet("win");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
+
     }
 
-    if (player.score > dealer.score && player.score <= 21) {
+    else if (player.score > dealer.score && player.score < 21) {
 
         winGame();
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
         bet("win");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
+    }
+
+    else if (player.score > 21) {
+
+        loseGame();
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
+        bet("lose");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
+    }
+
+    else if (dealer.score === 21 || (dealer.cards.length === 5 && dealer.score < 21)) {
+
+        loseGame();
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn()
+        bet("lose");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
+    }
+
+    else if (dealer.score > player.score) {
+
+        loseGame();
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+        bet("lose");
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
+    }
+
+       else if (player.score === dealer.score) {
+
+        drawGame();
+        hideHitBtn();
+        hideStandBtn();
+        hideSurrenderBtn();
+        showRestartBtn();
+        showBettingBtn();
+        hidePlayerBet();
+        endGame();
     }
 
     document.getElementById("player-money").innerHTML = "Your money: $" + player.money;
     downOnLuck();
-    showBettingBtn();
-    hidePlayerBet();
-    hideHitBtn();
-    hideStandBtn();
-        hideSurrenderBtn();
-        showRestartBtn()
 };
 
 var bet = function(outcome) {
@@ -332,15 +347,6 @@ var bet = function(outcome) {
         }
 };
 
-var checkBet = function() {
-
-    var playerBet = document.getElementById("bet").valueAsNumber
-
-    if (playerBet < 10) {
-        alert("Your bet has to be at least $10")
-    }
-}
-
 var surrender = function(event) {
     location.reload();
 };
@@ -351,7 +357,9 @@ var downOnLuck = function() {
         showSurrenderBtn();
         hideRestartBtn();
         hideBettingBtn();
-        document.getElementById("status-lose").innerHTML = "You lost! You are out of money! :(";
+        document.getElementById("status-test").style.display = "block";
+        document.getElementById("status-test").innerHTML = "You lost! You are out of money! :(";
+        document.getElementById("status-test").style.backgroundColor = "red";
     }
 };
 
@@ -808,37 +816,32 @@ var putPlayerUI = function() {
         document.getElementById("player-bet").innerHTML = "Your current bet: $" + (document.getElementById("bet").valueAsNumber);
 };
 
-var loseGame = function() {
+var endGame = function() {
 
         document.getElementById("game-status").style.display = "block";
         document.getElementById("status-test").style.display = "block";
-        document.getElementById("status-test").innerHTML = "YOU LOSE! :(";
-
         document.getElementById("dealer-points").style.display = "block";
         document.getElementById('dealer-points').innerHTML = "Dealer's Points: "+dealer.score;
         document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+}
+
+var loseGame = function() {
+
+        document.getElementById("status-test").innerHTML = "YOU LOSE! :(";
+        document.getElementById("status-test").style.backgroundColor = "maroon";
+
 };
 
 var winGame = function() {
 
-        document.getElementById("game-status").style.display = "block";
-        document.getElementById("status-test").style.display = "block";
         document.getElementById("status-test").innerHTML = "YOU WIN YAY! :)";
-
-        document.getElementById("dealer-points").style.display = "block";
-        document.getElementById('dealer-points').innerHTML = "Dealer's Points: "+dealer.score;
-        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
+        document.getElementById("status-test").style.backgroundColor = "green";
 };
 
 var drawGame = function() {
 
-        document.getElementById("game-status").style.display = "block";
-        document.getElementById("status-test").style.display = "block";
         document.getElementById("status-test").innerHTML = "ITS A DRAW!";
 
-        document.getElementById("dealer-points").style.display = "block";
-        document.getElementById('dealer-points').innerHTML = "Dealer's Points: "+dealer.score;
-        document.getElementById("cover").setAttribute("src", dealer.cards[1].Cardimage);
 };
 
 /////////////////////////////////////////////////

@@ -352,7 +352,7 @@ var surrender = function(event) {
 };
 
 var downOnLuck = function() {
-    if (player.money === 0) {
+    if (player.money <= 0) {
 
         showSurrenderBtn();
         hideRestartBtn();

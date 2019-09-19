@@ -2,6 +2,7 @@
 
 <img src="images/screenshot.jpg">
 
+<p><b>GA's Software Engineering Immersive:</b> Project 1</p>
 <b>Url:</b> https://nbinged.github.io/BlackJack/
 
 ## Basic Rules and Objectives

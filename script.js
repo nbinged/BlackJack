@@ -383,6 +383,7 @@ var restart = function(event) {
     temp = [];
 
     deck = [
+        
     //Hearts Suit//
     {
     Value: "A",
@@ -827,14 +828,14 @@ var endGame = function() {
 
 var loseGame = function() {
 
-        document.getElementById("status-test").innerHTML = "YOU LOSE! :(";
+        document.getElementById("status-test").innerHTML = "YOU LOSE!";
         document.getElementById("status-test").style.backgroundColor = "maroon";
 
 };
 
 var winGame = function() {
 
-        document.getElementById("status-test").innerHTML = "YOU WIN YAY! :)";
+        document.getElementById("status-test").innerHTML = "YOU WIN YAY!";
         document.getElementById("status-test").style.backgroundColor = "green";
 };
 

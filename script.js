@@ -44,7 +44,7 @@ var shuffle = function() {
         deck[cut1] = deck[cut2];
         deck[cut2] = temp;
     }
-    console.log(deck);
+//     console.log(deck);
 };
 
 ////////////////////
@@ -58,31 +58,31 @@ var playerScoreCheck = function() {
 
     for (i = 0; i < player.cards.length; i++) {
 
-        console.log("Value of "+i);
+//         console.log("Value of "+i);
         if (player.cards[i].Value === "J" || player.cards[i].Value === "Q" || player.cards[i].Value === "K") {
 
             player.score += 10;
-            console.log("Added picture-card. Player's current score: "+player.score)
+//             console.log("Added picture-card. Player's current score: "+player.score)
         }
 
         else if (player.cards[i].Value === "A") {
 
             player.score += 11;
             aceCount += 1;
-            console.log("Added Ace-card. Player's current score: "+player.score)
+//             console.log("Added Ace-card. Player's current score: "+player.score)
         }
 
         else {
             player.score += (parseInt(player.cards[i].Value));
-            console.log("Added another card. Player's current score: "+player.score)
+//             console.log("Added another card. Player's current score: "+player.score)
         }
 }
 
     if (aceCount > 0 && (player.score > 21)) {
             player.score -=10;
             aceCount -= 1;
-        console.log("Ace taken as '1'. Player's current score is "+player.score);
-        console.log(aceCount)
+//         console.log("Ace taken as '1'. Player's current score is "+player.score);
+//         console.log(aceCount)
         }
 
     if (player.score > 21) {
@@ -102,27 +102,27 @@ var dealerScoreCheck = function() {
         if (dealer.cards[i].Value === "J" || dealer.cards[i].Value === "Q" || dealer.cards[i].Value === "K") {
 
             dealer.score += 10;
-            console.log("Added picture-card. Dealer's current score: "+dealer.score)
+//             console.log("Added picture-card. Dealer's current score: "+dealer.score)
         }
 
         else if (dealer.cards[i].Value === "A") {
 
             dealer.score += 11;
             aceCount += 1;
-            console.log("Added Ace-card. Dealer's current score: "+dealer.score)
+//             console.log("Added Ace-card. Dealer's current score: "+dealer.score)
         }
 
         else {
             dealer.score += (parseInt(dealer.cards[i].Value));
-            console.log("Added another card. Dealer's current score: "+dealer.score)
+//             console.log("Added another card. Dealer's current score: "+dealer.score)
         }
     };
 
     if (aceCount > 0 && (dealer.score > 21)) {
             dealer.score -=10;
             aceCount -= 1;
-        console.log("Ace taken as '1'. Dealer's score is "+dealer.score);
-        console.log(aceCount)
+//         console.log("Ace taken as '1'. Dealer's score is "+dealer.score);
+//         console.log(aceCount)
     }
 }
 
@@ -135,9 +135,9 @@ var playerCards = function() {
         var cardImg  = document.createElement("img");
 
         //Player's Hand:
-        console.log("Player received card:")
-        console.log(deck[numCardsPulled]);
-        console.log(numCardsPulled);
+//         console.log("Player received card:")
+//         console.log(deck[numCardsPulled]);
+//         console.log(numCardsPulled);
 
         cardDiv.className = "cardDiv";
         cardImg.src = player.cards[numCardsPulled].Cardimage;
@@ -157,8 +157,8 @@ var dealerCards = function() {
         var dealtCard = deck.pop();
         dealer.cards.push(dealtCard);
 
-        console.log("Dealer received card:")
-        console.log(dealtCard);
+//         console.log("Dealer received card:")
+//         console.log(dealtCard);
 
         cardDiv.className = "cardDiv";
         cardImg.src = dealtCard.Cardimage;
@@ -177,8 +177,8 @@ var dealerCover = function() {
         var dealtCard = deck.pop();
         dealer.cards.push(dealtCard);
 
-        console.log("Dealer received card:")
-        console.log(dealtCard);
+//         console.log("Dealer received card:")
+//         console.log(dealtCard);
 
         cardDiv.className = "cardDiv";
         cardImg.id ="cover";
@@ -409,55 +409,55 @@ var restart = function(event) {
 var showStartBtn = function(){
     var startButton = document.querySelector('#btn-start');
     document.getElementById("btn-start").style.display = "block";
-    console.log("show 'START' button");
+//     console.log("show 'START' button");
 };
 
 var showHitBtn = function(){
     var hitMeButton = document.querySelector('#btn-hit');
     document.getElementById("btn-hit").style.display = "block";
-    console.log("show 'HIT' button");
+//     console.log("show 'HIT' button");
 };
 
 var showStandBtn = function(){
       var startButton = document.querySelector('#btn-stand');
       document.getElementById("btn-stand").style.display = "block";
-      console.log("show 'STAND' button");
+//       console.log("show 'STAND' button");
 };
 
 var showRestartBtn = function(){
     var restartBtn  = document.querySelector('#btn-restart');
     document.getElementById("btn-restart").style.display = "block";
-    console.log("show 'RESTART' button");
+//     console.log("show 'RESTART' button");
 };
 
 var showSurrenderBtn = function(){
     var surrenderBtn  = document.querySelector('#btn-surrender');
     document.getElementById("btn-surrender").style.display = "block";
-    console.log("show 'surrenderBtn' button");
+//     console.log("show 'surrenderBtn' button");
 };
 
 var hideStartBtn = function(){
     var hideStartButton = document.querySelector('#btn-start');
     document.getElementById("btn-start").style.display = "none";
-    console.log("hide 'START' button");
+//     console.log("hide 'START' button");
 };
 
 var hideHitBtn = function(){
     var hideHitBtn = document.querySelector('#btn-hit');
     document.getElementById("btn-hit").style.display = "none";
-    console.log("hide 'HIT' button");
+//     console.log("hide 'HIT' button");
 };
 
 var hideRestartBtn = function(){
     var surrenderBtn  = document.querySelector('#btn-surrender');
     document.getElementById("btn-restart").style.display = "none";
-    console.log("hide 'surrenderBtn' button");
+//     console.log("hide 'surrenderBtn' button");
 };
 
 var hideSurrenderBtn = function(){
     var restartBtn  = document.querySelector('#btn-restart');
     document.getElementById("btn-surrender").style.display = "none";
-    console.log("hide 'RESTART' button");
+//     console.log("hide 'RESTART' button");
 };
 
 var hidePressStart = function() {
@@ -468,17 +468,17 @@ var hidePressStart = function() {
 var hideStandBtn = function(){
       var startButton = document.querySelector('#btn-stand');
       document.getElementById("btn-stand").style.display = "none";
-      console.log("hide 'STAND' button");
+//       console.log("hide 'STAND' button");
 };
 
 var hideBettingBtn = function(){
       document.getElementById("betting").style.display = "none";
-      console.log("hide 'betting' button");
+//       console.log("hide 'betting' button");
 };
 
 var showBettingBtn = function(){
       document.getElementById("betting").style.display = "block";
-      console.log("show 'betting' button");
+//       console.log("show 'betting' button");
 };
 
 var showPlayerBet = function(){
